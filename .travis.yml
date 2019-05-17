@@ -4,8 +4,56 @@ language: python
 python: 3.7
 services: docker
 
+env:
+  global:
+    - secure: "uEADUbUxzklccL8Vxo6XW+YDvdgVvgLcc0u4mqbP5Lvxwx3iAu5eiua\
+      T78mVypwHKEJ93zaLwmVplFwTu0A8ApfmTdbKItImTr4h2Z/ey7I1sb/TbTvW464\
+      I6gWweNMP6BihI3Yt1YJYWo81W2IaZg4sniiDoaWcpYdB1tiYfHuaiip+A/IkboB\
+      CEN7XstCr3BpbBiithiRd5Ygv/xYmGcVIQQwb8smRGuPn10KeuQOeRNqbGH2QBBZ\
+      TXNbOA+B15xHaixi4Zd5GdBS1WmO/H4kU1JK7WB5yQ/ozMIzPKfXTt/tiQktX/oC\
+      Mhw0NKUEsmWqcp1JqPxMYr3TvOMw+b7ET3zHAZRi/8HnKI6gLPWCli8kMYOR69IY\
+      z51lAS+OIfRaLvIuIsKhc8QrEaThSxnJK/IXfX4AQyK9ZNvqC0M3PRE2fwmWWfPS\
+      cB6v0YyKvXzD6X02Ww9U4EO4N0DUw/PrqO04p0nbSqQELi5QHbFTlvOp2OeYZa6n\
+      qSyHpaOCH/FuW0umY2gV5SOFk8iAjnWhpqS6kDHK3W1H+3lbtAyS5avlwX4c+moG\
+      t1dEv7hExHZMzvxlKwS3lcbgsvca3JpqJc3ybFVwut02B53fvf0Vmmk7plU9f6rO\
+      h6oGXsQBfCjZC/pnMYKP7KzCoW9MlpkHmg0xaODXnWtcjrHoxtRM="
+    - secure: "cqKAIQtKT+XL7kjEptIg3589i1CSC3DS62Yhfrnt+k50e19HsJuFx8/\
+      NtQeLDSPce8esC0UeunjRe/yqCLrsOe5wgNEhGN37i+gSQQyZnCtXNHHOU2a4xJe\
+      q3hFSoPVMnu7G0wa7EUW09XrlqqKAkJxMMAY4SBvGWCBlOam/xIEwWBGfoCvWd66\
+      PCH8rAVT6J7EDz0RyjgloeiLsjmTA+zl8CvXDPvWxdGdh1bvxusDoFVipUaxyG6u\
+      veqFGimGSLdcIyI/YCvHJ6nOx7Uz82U3kvfX+02cT9ClTaM2JSAtHq+fmKQK74o6\
+      VLAzL7GrA/PksXYIViAWUpyyJvro4KRAm/0ADZE2wRk6JbztFL7f71XP+WBWBOMc\
+      cT1UWlPOXFQQiPQRaWlxGpueqsmE3cHHrymRKh3qS0E4Hqd3cS4kfgOx83C579L/\
+      guZ/56Q5Tjw7ep5ygRx/F8c/yicV+nxCl5Zkd9/7VNWzckbMsNnCRlSPg7Z8p0l7\
+      cTOkQn6ZUMmYljebdXm8DlV20T4YdupRW3JD7+uhrp6OiCZmH4QRpSkaSX4IyDAn\
+      PK47QQR4wxG0/BNBNPlOM5mq4R9YA75+MC81t5JUmniCocXH/hJTC1KPDrvBhQW9\
+      ZH8qhrLtJcKZYeEb9EkKtVKhfahzGN9gIa+nXTkAOLwwlKBQuB8Q="
+    - secure: "4H5DhM5rR5Zbs3mUEtXvHo6U5+Fvwbm/sVwPO84N+HmCEI7YYqOvE4P\
+      xqzhCzsyuYPV9yo15nzS773xSKtQ2xtzghSlkYtKN/UpaMs5zGBXkLIDCDQR50zu\
+      E52tMs8sspJwem+68uCyGL2kAwOuB4uaHo0aNR/QGy5mJ6pG1xGNVz7RBMx6fleQ\
+      jf0xPXhXhsIwI2ZdIHUyu9Siq5OyCfdtCJsuHaQj9aR+/0LA0JtoElps17rRg9Fa\
+      P6VSpbqLAO+hMj8La1vj7zwGBHot+Gw3drRlrSIlR9f7fOR3YJ4gSr/f/yg2mOvn\
+      /hzWK5k4hniX74U22EWTSASkscAwKVSJTD3YYLSBDkGgoHbFkI3ZO5goSTCTq4w4\
+      3KTe7E/6y7wq2SaC/h0ZArUAizw+e7FVKCStN2hNSpvsXVp74Elubh5UZmXhXbQa\
+      OfsvcbBRmLBFhwo3Hd/4IfemoYVamnJwHN/HXnLN+8on087QI1JuqB8AGtBred83\
+      gMoXT1+JChxBdr8qhtwrtlEJ2e96ie7Lmmbm9UgN64O5QUs8Sef+o967OaQUdCWp\
+      2p+aQH2INac9MItZ0LRWci2P76t4Ir3oApiBiwLMMlJMviqh3OAKnSPK9qB0pyRT\
+      mvT6hxE129B7Eny5aidN7E7/0Ald6kWFj8UBTXIx/Dpvudwfs3Zk="
+
+# Install terraform and terraform-doc
+before_install:
+  - >
+    wget
+    https://releases.hashicorp.com/terraform/0.11.13/terraform_0.11.13_linux_amd64.zip
+    -O terraform.zip
+  - sudo unzip terraform.zip -d /opt/terraform
+  - sudo ln -s /opt/terraform/terraform /usr/bin/terraform
+  - rm -f terraform.zip
+  - go get github.com/segmentio/terraform-docs
+
 install:
   - pip install --upgrade -r requirements-test.txt
+
 script:
   - pre-commit run --all-files
   - molecule test

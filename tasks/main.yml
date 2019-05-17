@@ -1,2 +1,52 @@
 ---
-# tasks file for skeleton
+# tasks file for cyhy_runner
+
+- name: Create the /var/local/cyhy/runner directory
+  file:
+    path: /var/local/cyhy/runner
+    state: directory
+    mode: 0755
+
+- name: Download and untar the cyhy-runner tarball
+  unarchive:
+    src: "https://api.github.com/repos/jsf9k/cyhy-runner/tarball/develop?\
+    access_token={{ github_oauth_token }}"
+    dest: /var/local/cyhy/runner
+    remote_src: yes
+    extra_opts:
+      - "--strip-components=1"
+
+#
+# Now we need to install the cyhy-runner dependencies
+#
+- name: Install docutils, since cyhy-runner needs it
+  pip:
+    name:
+      - docutils
+
+- name: Install python dependencies for cyhy-runner
+  pip:
+    chdir: /var/local/cyhy/runner
+    requirements: requirements.txt
+
+- name: Create some directories that cyhy-runner requires
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0755
+  loop:
+    - /var/cyhy/runner
+    - /var/log/cyhy
+
+# Copy the systemd unit file
+- name: Copy the systemd unit file for cyhy-runner
+  copy:
+    src: cyhy-runner.service
+    dest: /lib/systemd/system/cyhy-runner.service
+    mode: 0644
+
+# Enable cyhy-runner
+- name: Enable cyhy-runner
+  service:
+    name: cyhy-runner
+    enabled: yes
