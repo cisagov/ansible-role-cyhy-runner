@@ -1,19 +1,14 @@
 ---
-# boto3 is installed anywhere we would be applying this Ansible role
+# boto3 and systemd are installed anywhere we would be applying this
+# Ansible role
 - name: Prepare
   hosts: all
+  roles:
+    - pip
   tasks:
-    - name: Install pip
-      package:
-        name: python-pip
     - name: Install boto3
       pip:
         name: boto3
-
-# systemd is installed anywhere we would be applying this Ansible role
-- name: Prepare
-  hosts: all
-  tasks:
     - name: Install systemctl
       package:
         name: systemd
