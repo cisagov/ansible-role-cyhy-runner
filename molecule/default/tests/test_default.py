@@ -27,3 +27,9 @@ def test_pip_packages(host, pkg):
 def test_files(host, f):
     """Test that the expected files and directories are present."""
     assert host.file(f).exists
+
+
+@pytest.mark.parametrize("svc", ["cyhy-runner"])
+def test_services(host, svc):
+    """Test that the services were enabled."""
+    assert host.service(svc).is_enabled()
