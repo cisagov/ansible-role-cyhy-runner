@@ -8,8 +8,7 @@ lint:
 platforms:
   - name: debian9_systemd
     image: geerlingguy/docker-debian9-ansible:latest
-    capabilities:
-      - SYS_ADMIN
+    privileged: yes
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     command: /lib/systemd/systemd
