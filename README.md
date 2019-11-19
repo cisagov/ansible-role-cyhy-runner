@@ -1,6 +1,6 @@
 # ansible-role-cyhy-runner #
 
-[![Build Status](https://travis-ci.com/cisagov/ansible-role-cyhy-runner.svg?branch=develop)](https://travis-ci.com/cisagov/ansible-role-cyhy-runner)
+[![GitHub Build Status](https://github.com/cisagov/ansible-role-cyhy-runner/workflows/build/badge.svg)](https://github.com/cisagov/ansible-role-cyhy-runner/actions)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/cisagov/ansible-role-cyhy-runner.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-cyhy-runner/alerts/)
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/cisagov/ansible-role-cyhy-runner.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-cyhy-runner/context:python)
 
