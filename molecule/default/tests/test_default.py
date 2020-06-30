@@ -31,10 +31,7 @@ def test_files(host, f):
     assert host.file(f).exists
 
 
-# testinfra currently incorrectly identifies the service provider in
-# our Docker containers because of philpep/testinfra#416, so we have
-# to leave this test commented out for now.
-# @pytest.mark.parametrize("svc", ["cyhy-runner"])
-# def test_services(host, svc):
-#     """Test that the services were enabled."""
-#     assert host.service(svc).is_enabled
+@pytest.mark.parametrize("svc", ["cyhy-runner"])
+def test_services(host, svc):
+    """Test that the services were enabled."""
+    assert host.service(svc).is_enabled
