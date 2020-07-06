@@ -5,7 +5,7 @@
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/cisagov/ansible-role-cyhy-runner.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-cyhy-runner/context:python)
 
 An Ansible role for installing
-[jsf9k/cyhy-runner](https://github.com/jsf9k/cyhy-runner).
+[cisagov/cyhy-runner](https://github.com/cisagov/cyhy-runner).
 
 ## Requirements ##
 
