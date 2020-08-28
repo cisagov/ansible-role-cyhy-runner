@@ -3,6 +3,9 @@ galaxy_info:
   author: Shane Frasier
   description: Install cyhy-runner.
   company: CISA Cyber Assessments
+  galaxy_tags:
+    - cyhy
+    - runner
   license: CC0
   min_ansible_version: 2.0
   platforms:
@@ -19,18 +22,7 @@ galaxy_info:
         # Kali linux isn't an option here, but it is based on
         # Debian Testing:
         # https://www.kali.org/docs/policy/kali-linux-relationship-with-debian
-        # - bullseye
-    # - name: Fedora
-    #   versions:
-    #     - 32
-    #     - 33
-    # - name: Ubuntu
-    #   versions:
-    #     - bionic
-    #     - xenial
-  galaxy_tags:
-    - cyhy
-    - runner
+  role_name: cyhy_runner
 
 dependencies:
   - src: https://github.com/cisagov/ansible-role-pip
