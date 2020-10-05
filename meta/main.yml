@@ -23,20 +23,20 @@ galaxy_info:
     - name: Debian
       versions:
         - stretch
-        # - buster
-        # Kali linux isn't an option here, but it is based on
-        # Debian Testing:
-        # https://www.kali.org/docs/policy/kali-linux-relationship-with-debian
-        - bullseye
-    - name: Fedora
-      versions:
-        - 32
-        - 33
-    - name: Ubuntu
-      versions:
-        - xenial
-        - bionic
-        - focal
+    #     # - buster
+    #     # Kali linux isn't an option here, but it is based on
+    #     # Debian Testing:
+    #     # https://www.kali.org/docs/policy/kali-linux-relationship-with-debian
+    #     - bullseye
+    # - name: Fedora
+    #   versions:
+    #     - 32
+    #     - 33
+    # - name: Ubuntu
+    #   versions:
+    #     - xenial
+    #     - bionic
+    #     - focal
   role_name: cyhy_runner
 
 dependencies:
