@@ -15,17 +15,8 @@ lint: |
   ansible-lint
   flake8
 platforms:
-  - name: amazonlinux2_systemd
-    image: geerlingguy/docker-amazonlinux2-ansible:latest
-    privileged: yes
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    command: /lib/systemd/systemd
-    pre_build_image: yes
-  # Right now this code is only for Python3, and hence _not_ for Debian
-  # 9.
-  # - name: debian9_systemd
-  #   image: geerlingguy/docker-debian9-ansible:latest
+  # - name: amazonlinux2_systemd
+  #   image: geerlingguy/docker-amazonlinux2-ansible:latest
   #   privileged: yes
   #   volumes:
   #     - /sys/fs/cgroup:/sys/fs/cgroup:ro
