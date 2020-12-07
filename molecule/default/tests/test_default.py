@@ -21,7 +21,6 @@ def test_pip_packages(host, pkg):
 @pytest.mark.parametrize(
     "f",
     [
-        "/var/local/cyhy/runner",
         "/var/log/cyhy",
         "/lib/systemd/system/cyhy-runner.service",
     ],
