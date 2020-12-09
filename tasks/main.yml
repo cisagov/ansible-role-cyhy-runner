@@ -1,35 +1,17 @@
 ---
 # tasks file for cyhy_runner
 
-- name: Create the /var/local/cyhy/runner directory
-  file:
-    path: /var/local/cyhy/runner
-    state: directory
-    mode: 0755
-
-- name: Download and untar the cyhy-runner tarball
-  # ansible-lint E208 gives an error if we don't specify the mode, but
-  # we definitely don't want to do that here since it will override
-  # the permissions on the files in the archive.
-  unarchive: # noqa 208
-    src: "https://api.github.com/repos/cisagov/cyhy-runner/tarball/develop"
-    dest: /var/local/cyhy/runner
-    remote_src: yes
-    extra_opts:
-      - "--strip-components=1"
-
-#
-# Now we need to install the cyhy-runner dependencies
-#
-- name: Install docutils, since cyhy-runner needs it
-  pip:
+- name: Install system versions of the Python packages that cyhy-runner needs
+  package:
     name:
-      - docutils
+      - python3-daemon
+      - python3-docopt
+      - python3-lockfile
+      - python3-requests
 
-- name: Install python dependencies for cyhy-runner
+- name: Install the cyhy-runner package
   pip:
-    chdir: /var/local/cyhy/runner
-    requirements: requirements.txt
+    name: https://api.github.com/repos/cisagov/cyhy-runner/tarball/develop
 
 - name: Create some directories that cyhy-runner requires
   file:

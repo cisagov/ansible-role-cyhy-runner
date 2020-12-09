@@ -12,6 +12,14 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 ).get_hosts("all")
 
 
+@pytest.mark.parametrize(
+    "pkg", ["python3-daemon", "python3-docopt", "python3-lockfile", "python3-requests"]
+)
+def test_packages(host, pkg):
+    """Test that the appropriate packages were installed."""
+    assert host.package(pkg).is_installed
+
+
 @pytest.mark.parametrize("pkg", ["cyhy-runner"])
 def test_pip_packages(host, pkg):
     """Test that the pip packages were installed."""
@@ -21,7 +29,6 @@ def test_pip_packages(host, pkg):
 @pytest.mark.parametrize(
     "f",
     [
-        "/var/local/cyhy/runner",
         "/var/log/cyhy",
         "/lib/systemd/system/cyhy-runner.service",
     ],
