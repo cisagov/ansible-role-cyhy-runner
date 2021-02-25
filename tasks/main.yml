@@ -2,7 +2,7 @@
 # tasks file for cyhy_runner
 
 - name: Install system versions of the Python packages that cyhy-runner needs
-  package:
+  ansible.builtin.package:
     name:
       - python3-daemon
       - python3-docopt
@@ -10,11 +10,11 @@
       - python3-requests
 
 - name: Install the cyhy-runner package
-  pip:
+  ansible.builtin.pip:
     name: https://api.github.com/repos/cisagov/cyhy-runner/tarball/develop
 
 - name: Create some directories that cyhy-runner requires
-  file:
+  ansible.builtin.file:
     path: "{{ item }}"
     state: directory
     mode: 0755
@@ -24,13 +24,13 @@
 
 # Copy the systemd unit file
 - name: Copy the systemd unit file for cyhy-runner
-  copy:
+  ansible.builtin.copy:
     src: cyhy-runner.service
     dest: /lib/systemd/system/cyhy-runner.service
     mode: 0644
 
 # Enable cyhy-runner
 - name: Enable cyhy-runner
-  service:
+  ansible.builtin.service:
     name: cyhy-runner
     enabled: yes
