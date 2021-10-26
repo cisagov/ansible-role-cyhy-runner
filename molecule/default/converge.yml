@@ -1,5 +1,7 @@
 ---
 - name: Converge
   hosts: all
-  roles:
-    - role: ansible-role-cyhy-runner
+  tasks:
+    - name: Include ansible-role-cyhy-runner
+      ansible.builtin.include_role:
+        name: ansible-role-cyhy-runner
