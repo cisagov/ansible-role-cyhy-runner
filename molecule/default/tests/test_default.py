@@ -12,12 +12,23 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 ).get_hosts("all")
 
 
-@pytest.mark.parametrize(
-    "pkg", ["python3-daemon", "python3-docopt", "python3-lockfile", "python3-requests"]
-)
-def test_packages(host, pkg):
+def test_packages(host):
     """Test that the appropriate packages were installed."""
-    assert host.package(pkg).is_installed
+    shared_packages = [
+        "python3-daemon",
+        "python3-docopt",
+        "python3-lockfile",
+        "python3-requests",
+    ]
+    debian_packages = [*shared_packages, "python3-yaml"]
+    redhat_packages = [*shared_packages, "python3-pyyaml"]
+
+    if host.system_info.distribution in ["debian", "kali", "ubuntu"]:
+        for pkg in debian_packages:
+            assert host.package(pkg).is_installed
+    elif host.system_info.distribution in ["fedora"]:
+        for pkg in redhat_packages:
+            assert host.package(pkg).is_installed
 
 
 @pytest.mark.parametrize("pkg", ["cyhy-runner"])
