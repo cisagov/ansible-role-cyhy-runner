@@ -38,15 +38,30 @@ def test_pip_packages(host, pkg):
 
 
 @pytest.mark.parametrize(
-    "f",
+    "directory",
     [
-        "/var/log/cyhy",
-        "/lib/systemd/system/cyhy-runner.service",
+        {"mode": "0o755", "path": "/var/cyhy/runner"},
+        {"mode": "0o755", "path": "/var/log/cyhy"},
     ],
 )
-def test_files(host, f):
-    """Test that the expected files and directories are present."""
-    assert host.file(f).exists
+def test_directories(host, directory):
+    """Test that the appropriate directories were created."""
+    assert host.file(directory["path"]).exists
+    assert host.file(directory["path"]).is_directory
+    assert oct(host.file(directory["path"]).mode) == directory["mode"]
+
+
+@pytest.mark.parametrize(
+    "file",
+    [
+        {"mode": "0o644", "path": "/lib/systemd/system/cyhy-runner.service"},
+    ],
+)
+def test_files(host, file):
+    """Test that the expected files are present."""
+    assert host.file(file["path"]).exists
+    assert host.file(file["path"]).is_file
+    assert oct(host.file(file["path"]).mode) == file["mode"]
 
 
 @pytest.mark.parametrize("svc", ["cyhy-runner"])
