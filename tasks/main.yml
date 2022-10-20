@@ -17,6 +17,7 @@
 
 - name: Install the cyhy-runner package
   ansible.builtin.pip:
+    executable: pip3
     name: https://api.github.com/repos/cisagov/cyhy-runner/tarball/develop
 
 - name: Create some directories that cyhy-runner requires

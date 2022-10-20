@@ -34,7 +34,7 @@ def test_packages(host):
 @pytest.mark.parametrize("pkg", ["cyhy-runner"])
 def test_pip_packages(host, pkg):
     """Test that the pip packages were installed."""
-    assert pkg in host.pip_package.get_packages(pip_path="pip3")
+    assert pkg in host.pip.get_packages(pip_path="pip3")
 
 
 @pytest.mark.parametrize(
