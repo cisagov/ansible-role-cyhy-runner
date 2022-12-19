@@ -1,8 +1,7 @@
 # ansible-role-cyhy-runner #
 
 [![GitHub Build Status](https://github.com/cisagov/ansible-role-cyhy-runner/workflows/build/badge.svg)](https://github.com/cisagov/ansible-role-cyhy-runner/actions)
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/cisagov/ansible-role-cyhy-runner.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-cyhy-runner/alerts/)
-[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/cisagov/ansible-role-cyhy-runner.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/ansible-role-cyhy-runner/context:python)
+[![CodeQL](https://github.com/cisagov/ansible-role-cyhy-runner/workflows/CodeQL/badge.svg)](https://github.com/cisagov/ansible-role-cyhy-runner/actions/workflows/codeql-analysis.yml)
 
 An Ansible role for installing
 [cisagov/cyhy-runner](https://github.com/cisagov/cyhy-runner).
@@ -34,8 +33,10 @@ Here's how to use it in a playbook:
 - hosts: all
   become: yes
   become_method: sudo
-  roles:
-    - skeleton
+  tasks:
+    - name: Install the CyHy runner
+      ansible.builtin.include_role:
+        name: cyhy_runner
 ```
 
 ## Contributing ##
