@@ -23,7 +23,8 @@ None.
 
 ## Dependencies ##
 
-None.
+- [cisagov/ansible-role-pip](https://github.com/cisagov/ansible-role-pip)
+- [cisagov/ansible-role-python](https://github.com/cisagov/ansible-role-python)
 
 ## Example Playbook ##
 

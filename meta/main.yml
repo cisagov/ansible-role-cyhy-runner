@@ -41,3 +41,5 @@ galaxy_info:
 dependencies:
   - src: https://github.com/cisagov/ansible-role-pip
     name: pip
+  - src: https://github.com/cisagov/ansible-role-python
+    name: python
