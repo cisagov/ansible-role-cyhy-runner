@@ -15,6 +15,7 @@ galaxy_info:
   min_ansible_version: "2.10"
   namespace: cisagov
   platforms:
+    # There is no python3-docopt package available for Amazon Linux 2.
     # - name: Amazon Linux 2
     #   versions:
     #     - any
