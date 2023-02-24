@@ -15,25 +15,16 @@
   ansible.builtin.package:
     name: "{{ packages }}"
 
-# Only the Debian and Kali distros currently know about the
-# --break-system-packages CLI option.
-- name: Install the cyhy-runner package (not Debian or Kali)
+- name: Install the cyhy-runner package
   ansible.builtin.pip:
     executable: pip3
+    # The extra argument is necessary on Debian 12, which correctly
+    # recognizes that the local Python is externally managed
+    # (i.e. managed via the system package manager and not by pip).
+    # The extra argument is understood by pip on Debian and Kali
+    # systems, but not others.
+    extra_args: "{{ ansible_distribution is in ['Debian', 'Kali'] | ternary('--break-system-packages', omit) }}"
     name: https://api.github.com/repos/cisagov/cyhy-runner/tarball/develop
-  when:
-    - not ansible_distribution is in ["Debian", "Kali"]
-
-- name: Install the cyhy-runner package (Debian and Kali)
-  ansible.builtin.pip:
-    executable: pip3
-    # This is necessary on Debian 12, which correctly recognizes that
-    # the local Python is externally managed (i.e. managed via the
-    # system package manager and not by pip).
-    extra_args: --break-system-packages
-    name: https://api.github.com/repos/cisagov/cyhy-runner/tarball/develop
-  when:
-    - ansible_distribution is in ["Debian", "Kali"]
 
 - name: Create some directories that cyhy-runner requires
   ansible.builtin.file:
