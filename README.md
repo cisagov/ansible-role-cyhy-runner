@@ -12,14 +12,10 @@ None.
 
 ## Role Variables ##
 
-None.
-
-<!--
 | Variable | Description | Default | Required |
 |----------|-------------|---------|----------|
-| optional_variable | Describe its purpose. | `default_value` | No |
-| required_variable | Describe its purpose. | n/a | Yes |
--->
+| file_owner_group | The name of the group that should own any non-system files or directories created by this role. | [Omitted](https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html#making-variables-optional) | No |
+| file_owner_username | The name of the user that should own any non-system files or directories created by this role. | [Omitted](https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html#making-variables-optional) | No |
 
 ## Dependencies ##
 

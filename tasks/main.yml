@@ -28,7 +28,9 @@
 
 - name: Create some directories that cyhy-runner requires
   ansible.builtin.file:
+    group: "{{ file_owner_group | default(omit) }}"
     mode: 0755
+    owner: "{{ file_owner_username | default(omit) }}"
     path: "{{ item }}"
     state: directory
   loop:
