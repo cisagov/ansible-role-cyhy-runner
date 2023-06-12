@@ -28,9 +28,11 @@
 
 - name: Create some directories that cyhy-runner requires
   ansible.builtin.file:
+    group: "{{ file_owner_group | default(omit) }}"
+    mode: 0755
+    owner: "{{ file_owner_username | default(omit) }}"
     path: "{{ item }}"
     state: directory
-    mode: 0755
   loop:
     - /var/cyhy/runner
     - /var/log/cyhy
@@ -38,12 +40,12 @@
 # Copy the systemd unit file
 - name: Copy the systemd unit file for cyhy-runner
   ansible.builtin.copy:
-    src: cyhy-runner.service
     dest: /lib/systemd/system/cyhy-runner.service
     mode: 0644
+    src: cyhy-runner.service
 
 # Enable cyhy-runner
 - name: Enable cyhy-runner
   ansible.builtin.service:
-    name: cyhy-runner
     enabled: yes
+    name: cyhy-runner
