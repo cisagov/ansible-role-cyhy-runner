@@ -47,5 +47,5 @@
 # Enable cyhy-runner
 - name: Enable cyhy-runner
   ansible.builtin.service:
-    enabled: yes
+    enabled: true
     name: cyhy-runner
