@@ -26,9 +26,11 @@ def test_packages(host):
     if host.system_info.distribution in ["debian", "kali", "ubuntu"]:
         for pkg in debian_packages:
             assert host.package(pkg).is_installed
-    elif host.system_info.distribution in ["fedora"]:
+    elif host.system_info.distribution in ["amzn", "fedora"]:
         for pkg in redhat_packages:
             assert host.package(pkg).is_installed
+    else:
+        assert False, f"Unknown distribution {host.system_info.distribution}"
 
 
 @pytest.mark.parametrize("pkg", ["cyhy-runner"])
