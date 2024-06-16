@@ -1,5 +1,4 @@
 ---
-# tasks file for cyhy_runner
 - name: Load var file with package names based on the OS type
   ansible.builtin.include_vars: "{{ lookup('first_found', params) }}"
   vars:
