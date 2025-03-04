@@ -30,7 +30,6 @@ galaxy_info:
         - "2023"
     - name: Debian
       versions:
-        - buster
         - bullseye
         - bookworm
         - trixie
@@ -44,7 +43,6 @@ galaxy_info:
         - "2023"
     - name: Ubuntu
       versions:
-        - focal
         - jammy
         - noble
   role_name: cyhy_runner
