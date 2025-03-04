@@ -186,7 +186,6 @@ jobs:
           - arm64
         platform:
           - amazonlinux2023-systemd
-          - debian10-systemd
           - debian11-systemd
           - debian12-systemd
           - debian13-systemd
@@ -194,7 +193,6 @@ jobs:
           - fedora40-systemd
           - fedora41-systemd
           - kali-systemd
-          - ubuntu-20-systemd
           - ubuntu-22-systemd
           - ubuntu-24-systemd
         scenario:
