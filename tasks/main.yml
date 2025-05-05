@@ -20,13 +20,17 @@
     # The extra argument is necessary on modern platforms, which
     # correctly recognize that the local Python is externally managed
     # (i.e. managed via the system package manager and not by pip).
-    extra_args: "{{ (ansible_distribution in ['Kali'] or (ansible_distribution in ['Debian', 'Ubuntu'] and ansible_distribution_release in ['bookworm', 'noble', 'trixie'])) | ternary('--break-system-packages', omit) }}"
+    extra_args: >-
+      {{ (ansible_distribution in ['Kali'] or
+      (ansible_distribution in ['Debian', 'Ubuntu']
+      and ansible_distribution_release in ['bookworm', 'noble', 'trixie'])) |
+      ternary('--break-system-packages', omit) }}
     name: https://api.github.com/repos/cisagov/cyhy-runner/tarball/develop
 
 - name: Create some directories that cyhy-runner requires
   ansible.builtin.file:
     group: "{{ cyhy_runner_file_owner_group | default(omit) }}"
-    mode: 0755
+    mode: u=rwx,g=rx,o=rx
     owner: "{{ cyhy_runner_file_owner_username | default(omit) }}"
     path: "{{ item }}"
     state: directory
@@ -38,7 +42,7 @@
 - name: Copy the systemd unit file for cyhy-runner
   ansible.builtin.copy:
     dest: /lib/systemd/system/cyhy-runner.service
-    mode: 0644
+    mode: u=rw,g=r,o=r
     src: cyhy-runner.service
 
 # Enable cyhy-runner
