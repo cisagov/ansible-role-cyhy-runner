@@ -23,7 +23,7 @@
     extra_args: >-
       {{ (ansible_distribution in ['Kali'] or
       (ansible_distribution in ['Debian', 'Ubuntu']
-      and ansible_distribution_release in ['bookworm', 'noble', 'trixie'])) |
+      and ansible_distribution_release in ['bookworm', 'noble', 'trixie', 'forky'])) |
       ternary('--break-system-packages', omit) }}
     name: https://api.github.com/repos/cisagov/cyhy-runner/tarball/develop
 
