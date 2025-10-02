@@ -25,7 +25,8 @@
       (ansible_distribution in ['Debian', 'Ubuntu']
       and ansible_distribution_release in ['bookworm', 'noble', 'trixie', 'forky'])) |
       ternary('--break-system-packages', omit) }}
-    name: https://api.github.com/repos/cisagov/cyhy-runner/tarball/develop
+    name: >-
+      https://api.github.com/repos/cisagov/cyhy-runner/tarball/{{ cyhy_runner_version }}
 
 - name: Create some directories that cyhy-runner requires
   ansible.builtin.file:
