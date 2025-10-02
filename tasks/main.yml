@@ -36,6 +36,8 @@
     state: directory
   loop:
     - /var/cyhy/runner
+    - /var/cyhy/runner/done
+    - /var/cyhy/runner/running
     - /var/log/cyhy
 
 # Copy the systemd unit file
