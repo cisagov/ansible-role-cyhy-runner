@@ -43,6 +43,8 @@ def test_pip_packages(host, pkg):
     "directory",
     [
         {"mode": "0o755", "path": "/var/cyhy/runner"},
+        {"mode": "0o755", "path": "/var/cyhy/runner/done"},
+        {"mode": "0o755", "path": "/var/cyhy/runner/running"},
         {"mode": "0o755", "path": "/var/log/cyhy"},
     ],
 )
