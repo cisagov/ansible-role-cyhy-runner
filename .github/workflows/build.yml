@@ -222,7 +222,6 @@ jobs:
           - fedora42-systemd
           - fedora43-systemd
           - kali-systemd
-          - ubuntu-22-systemd
           - ubuntu-24-systemd
         scenario:
           - default
