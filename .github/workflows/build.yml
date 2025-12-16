@@ -216,7 +216,6 @@ jobs:
           - amd64
           - arm64
         platform:
-          - amazonlinux2023-systemd
           - debian12-systemd
           - debian13-systemd
           - debian14-systemd
