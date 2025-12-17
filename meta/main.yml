@@ -25,25 +25,20 @@ galaxy_info:
   min_ansible_version: "2.10"
   namespace: cisagov
   platforms:
-    - name: Amazon Linux
-      versions:
-        - "2023"
     - name: Debian
       versions:
-        - bullseye
         - bookworm
         - trixie
         - forky
     - name: Fedora
       versions:
-        - "41"
         - "42"
+        - "43"
     - name: Kali
       versions:
         - "2023"
     - name: Ubuntu
       versions:
-        - jammy
         - noble
   role_name: cyhy_runner
   standalone: true
