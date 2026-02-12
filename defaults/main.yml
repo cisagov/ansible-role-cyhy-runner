@@ -1,0 +1,2 @@
+# The version of cisagov/cyhy-runner to use; must be a valid git reference
+cyhy_runner_version: v3.0.0
