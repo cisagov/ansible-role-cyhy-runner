@@ -30,7 +30,7 @@ def test_packages(host):
         for pkg in redhat_packages:
             assert host.package(pkg).is_installed
     else:
-        assert False, f"Unknown distribution {host.system_info.distribution}"
+        raise ValueError(f"Unknown distribution {host.system_info.distribution}")
 
 
 @pytest.mark.parametrize("pkg_name,pkg_version", [("cyhy-runner", "3.0.0")])
