@@ -10,23 +10,24 @@
       paths:
         - "{{ role_path }}/vars"
 
+- name: Install pipx
+  ansible.builtin.package:
+    name: pipx
+
 - name: Install system versions of the Python packages that cyhy-runner needs
   ansible.builtin.package:
     name: "{{ packages }}"
 
-- name: Install the cyhy-runner package
-  ansible.builtin.pip:
-    executable: /usr/bin/pip3
-    # The extra argument is necessary on modern platforms, which
-    # correctly recognize that the local Python is externally managed
-    # (i.e. managed via the system package manager and not by pip).
-    extra_args: >-
-      {{ (ansible_distribution in ['Kali'] or
-      (ansible_distribution in ['Debian', 'Ubuntu']
-      and ansible_distribution_release not in ['buster', 'bullseye'])) |
-      ternary('--break-system-packages', omit) }}
-    name: >-
+- name: Install cyhy-runner with pipx
+  community.general.pipx:
+    name: cyhy-runner
+    source: >-
       https://api.github.com/repos/cisagov/cyhy-runner/tarball/{{ cyhy_runner_version }}
+    # We want to use any Python packages that are installed on the system
+    system_site_packages: true
+  tags:
+    # This module is not idempotent when using the source parameter
+    - molecule-idempotence-notest
 
 - name: Create some directories that cyhy-runner requires
   ansible.builtin.file:

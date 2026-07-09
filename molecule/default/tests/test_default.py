@@ -14,14 +14,15 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 
 def test_packages(host):
     """Test that the appropriate packages were installed."""
+    dependency_packages = ["pipx"]
     shared_packages = [
         "python3-daemon",
         "python3-docopt",
         "python3-lockfile",
         "python3-requests",
     ]
-    debian_packages = [*shared_packages, "python3-yaml"]
-    redhat_packages = [*shared_packages, "python3-pyyaml"]
+    debian_packages = [*dependency_packages, *shared_packages, "python3-yaml"]
+    redhat_packages = [*dependency_packages, *shared_packages, "python3-pyyaml"]
 
     if host.system_info.distribution in ["debian", "kali", "ubuntu"]:
         for pkg in debian_packages:
@@ -34,12 +35,15 @@ def test_packages(host):
 
 
 @pytest.mark.parametrize("pkg_name,pkg_version", [("cyhy-runner", "3.0.0")])
-def test_pip_packages(host, pkg_name, pkg_version):
+def test_pipx_packages(host, pkg_name, pkg_version):
     """Test that the pip packages were installed."""
-    pip_packages = host.pip.get_packages(pip_path="/usr/bin/pip3")
+    pipx_list_output = host.command("pipx list --short").stdout
+    pipx_packages = dict(line.split() for line in pipx_list_output.splitlines() if line)
 
-    assert pkg_name in pip_packages
-    assert pip_packages[pkg_name]["version"] == pkg_version
+    assert pkg_name in pipx_packages, f"{pkg_name} is not installed with pipx"
+    assert (
+        pipx_packages[pkg_name] == pkg_version
+    ), f"{pkg_name} version is {pipx_packages[pkg_name]}, expected {pkg_version}"
 
 
 @pytest.mark.parametrize(
