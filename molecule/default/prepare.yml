@@ -38,6 +38,14 @@
         'degraded' in systemctl_status.stdout
       when: ansible_service_mgr == "systemd"
 
+- name: Ensure uv is not installed
+  hosts: all
+  tasks:
+    - name: Ensure uv is not installed
+      ansible.builtin.package:
+        name: uv
+        state: absent
+
 - name: Import upgrade playbook
   ansible.builtin.import_playbook: upgrade.yml
 
