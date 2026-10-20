@@ -1,0 +1,30 @@
+{
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  // Dependabot keeps handling github-actions + pip; Renovate only manages the
+  // cyhy-runner pin, so restrict it to the custom manager to avoid overlap.
+  customManagers: [
+    {
+      customType: "regex",
+      datasourceTemplate: "github-releases",
+      depNameTemplate: "cisagov/cyhy-runner",
+      managerFilePatterns: [
+        "/^defaults/main\\.yml$/",
+        "/^molecule/default/tests/test_default\\.py$/",
+        "/^README\\.md$/",
+      ],
+      matchStrings: [
+        "cyhy_runner_version:\\s*(?<currentValue>\\S+)", // defaults/main.yml
+        "cyhy\\\\?_runner\\\\?_version[^`\\n]*`(?<currentValue>[^`\\n]+)`", // README table cell
+        '\\("cyhy-runner",\\s*"(?<currentValue>[^"\\n]+)"\\)', // Molecule test
+      ],
+      versioningTemplate: "semver-coerced", // handles the leading `v`
+    },
+  ],
+  dependencyDashboard: true,
+  enabledManagers: ["custom.regex"],
+  extends: ["config:recommended"],
+  // The ignorePaths inherited from config:recommended include **/tests/**,
+  // which would exclude the Molecule test.
+  ignorePaths: [],
+  labels: ["dependencies"],
+}
