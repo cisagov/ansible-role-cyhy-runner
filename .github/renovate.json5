@@ -1,18 +1,21 @@
 {
   $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  // Dependabot keeps handling github-actions + pip; Renovate only manages the
+  // cyhy-runner pin, so restrict it to the custom manager to avoid overlap.
   customManagers: [
     {
-      // This manager is intended to handle our Ansible role dependencies
-      // in meta/main.yml and meta/requirements.yml.  To make use of it
-      // simply add a "version: " specifier for the role specifying the
-      // most recent GitHub release and then on the previous line add a
-      // Renovate annotation of the form:
-      // # renovate: datasource=github-releases depName=cisagov/ansible-role-xyz
       customType: "regex",
       datasourceTemplate: "github-releases",
-      managerFilePatterns: ["meta/main\\.yml", "meta/requirements\\.yml"],
+      depNameTemplate: "cisagov/cyhy-runner",
+      managerFilePatterns: [
+        "/^defaults/main\\.yml$/",
+        "/^molecule/default/tests/test_default\\.py$/",
+        "/^README\\.md$/",
+      ],
       matchStrings: [
-        "#\\s*renovate:\\s*datasource=github-releases\\s+depName=(?<depName>\\S+)\\s*version:\\s*(?<currentValue>\\S+)",
+        "cyhy_runner_version:\\s*(?<currentValue>\\S+)", // defaults/main.yml
+        "cyhy\\\\?_runner\\\\?_version[^`\\n]*`(?<currentValue>[^`\\n]+)`", // README table cell
+        '\\("cyhy-runner",\\s*"(?<currentValue>[^"\\n]+)"\\)', // Molecule test
       ],
       versioningTemplate: "semver-coerced", // handles the leading `v`
     },
@@ -20,5 +23,7 @@
   dependencyDashboard: true,
   enabledManagers: ["custom.regex"],
   extends: ["config:recommended"],
+  // config:recommended ignores **/tests/**, which hides the Molecule test.
+  ignorePaths: [],
   labels: ["dependencies"],
 }
