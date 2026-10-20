@@ -23,7 +23,8 @@
   dependencyDashboard: true,
   enabledManagers: ["custom.regex"],
   extends: ["config:recommended"],
-  // config:recommended ignores **/tests/**, which hides the Molecule test.
+  // The ignorePaths inherited from config:recommended include **/tests/**,
+  // which would exclude the Molecule test.
   ignorePaths: [],
   labels: ["dependencies"],
 }
