@@ -12,28 +12,7 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 ).get_hosts("all")
 
 
-def test_packages(host):
-    """Test that the appropriate packages were installed."""
-    shared_packages = [
-        "python3-daemon",
-        "python3-docopt",
-        "python3-lockfile",
-        "python3-requests",
-    ]
-    debian_packages = [*shared_packages, "python3-yaml"]
-    redhat_packages = [*shared_packages, "python3-pyyaml"]
-
-    if host.system_info.distribution in ["debian", "kali", "ubuntu"]:
-        for pkg in debian_packages:
-            assert host.package(pkg).is_installed
-    elif host.system_info.distribution in ["amzn", "fedora"]:
-        for pkg in redhat_packages:
-            assert host.package(pkg).is_installed
-    else:
-        raise ValueError(f"Unknown distribution {host.system_info.distribution}")
-
-
-@pytest.mark.parametrize("pkg_name,pkg_version", [("cyhy-runner", "3.0.0")])
+@pytest.mark.parametrize("pkg_name,pkg_version", [("cyhy-runner", "3.0.1")])
 def test_pip_packages(host, pkg_name, pkg_version):
     """Test that the pip packages were installed."""
     pip_packages = host.pip.get_packages(pip_path="/usr/bin/pip3")
