@@ -1,19 +1,4 @@
 ---
-- name: Load var file with package names based on the OS type
-  ansible.builtin.include_vars: "{{ lookup('first_found', params) }}"
-  vars:
-    params:
-      files:
-        - "{{ ansible_distribution }}_{{ ansible_distribution_release }}.yml"
-        - "{{ ansible_distribution }}.yml"
-        - "{{ ansible_os_family }}.yml"
-      paths:
-        - "{{ role_path }}/vars"
-
-- name: Install system versions of the Python packages that cyhy-runner needs
-  ansible.builtin.package:
-    name: "{{ packages }}"
-
 - name: Install the cyhy-runner package
   ansible.builtin.pip:
     executable: /usr/bin/pip3
