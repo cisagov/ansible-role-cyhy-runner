@@ -33,7 +33,7 @@ def test_packages(host):
         raise ValueError(f"Unknown distribution {host.system_info.distribution}")
 
 
-@pytest.mark.parametrize("pkg_name,pkg_version", [("cyhy-runner", "3.0.0")])
+@pytest.mark.parametrize("pkg_name,pkg_version", [("cyhy-runner", "3.0.2")])
 def test_pip_packages(host, pkg_name, pkg_version):
     """Test that the pip packages were installed."""
     pip_packages = host.pip.get_packages(pip_path="/usr/bin/pip3")
